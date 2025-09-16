@@ -16,6 +16,6 @@ class Trip(models.Model):
     attractions = models.TextField
     notes = models.TextField
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-     
+    
     def __str__(self):
-        return self.name
+        return self.location

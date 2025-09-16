@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/cats/cat-detail.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="cat-container">
+  <div class="cat-img">
+    <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="A skater boy cat" />
+  </div>
+  <div class="cat-details">
+    <h1>{{ Trip.location }}</h1>
+    
+     {% comment %} <p>Your upcoming {{ trip.location }} trip</p> {% endcomment %}
+        {% comment %} <h2 class="card-title">{{ trip.location }}</h2>
+        {% if trip.date > today %}
+        <p>Your upcoming {{ trip.location }} trip</p>
+        {% elif trip.date = today %}
+        <p>Your current {{ trip.location }} trip</p>
+        {% else %}
+        <p>Your past {{ trip.location }} trip</p>
+        {% endif %}
+        <p><small>{{ trip.notes }}</small></p> {% endcomment %}
+
+
+  </div>
+</section>
+{% endblock %}

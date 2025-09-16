@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from datetime import datetime
+from .models import Trip
 
 # from django.contrib.auth.views import LoginView
 
@@ -34,4 +35,9 @@ def about(request):
     # return HttpResponse('<h1>ABOUT NAVIgator</h1>')
 
 def trip_index(request):
+    trips = Trip.objects.all()
     return render(request, 'trips/index.html', {'trips': trips})
+
+def trip_detail(request, trip_id):
+    trip = Trip.objects.get(id=trip_id)
+    return render(request, 'trips/detail.html', {'trip': trip})
