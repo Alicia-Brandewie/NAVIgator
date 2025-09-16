@@ -6,8 +6,8 @@ from . import views
 
 urlpatterns = [
     
-    path('', views.Home.as_view(), name='home'),
+    path('', views.home, name='home'),
     path('about/', views.about, name='about'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
 
 ]

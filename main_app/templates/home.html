@@ -5,13 +5,29 @@
   rel="stylesheet"
   href="{% static 'css/home.css' %}"
 /> {% endcomment %}
-{% endblock %} 
-{% block content %}
+{% comment %} {% endblock %} 
+{% block content %} {% endcomment %}
 
 <section>
     <h1>NAVIgator</h1>
 </section>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} FOR END
 {% if not user.is_authenticated %}
 <section>
   <form action="{% url 'home' %}" method="post" class="login">
@@ -23,4 +39,4 @@
 </section>
 {% endif %}
 
-{% endblock %}
+{% endblock %} {% endcomment %}
