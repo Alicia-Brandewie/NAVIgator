@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+
 # from django.contrib.auth.views import LoginView
 
 
@@ -9,7 +10,8 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse('<h1>NAVIgator</h1>')
+    return render(request, 'home.html')
+    # return HttpResponse('<h1>NAVIgator</h1>')
     # template_name = 'home.html'
 
 
