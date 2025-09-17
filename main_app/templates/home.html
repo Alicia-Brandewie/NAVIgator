@@ -1,12 +1,22 @@
 {% extends 'base.html' %}
 {% load static %} 
-{% block head %}
 
+{% block head %}
 <section>
     <h1>NAVIgator</h1>
     <h3>Welcome!</h3>
 </section>
 
+{% if not user.is_authenticated %}
+    <section>
+    <form action="{% url 'home' %}" method="post" class="login">
+        <h1>Login</h1>
+        {% csrf_token %} {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" class="btn submit">Login</button>
+    </form>
+    </section>
+{% endif %}
 
 
 {% endblock %} 
