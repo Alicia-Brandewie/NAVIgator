@@ -6,6 +6,9 @@ from .models import Trip
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 #__________Public Views__________#
 
@@ -34,7 +37,7 @@ def signup(request):
             user = form.save()
             # This is how we log a user in
             login(request, user)
-            return redirect('cat-index')
+            return redirect('trip-index')
         else:
             error_message = 'Invalid sign up - try again'
     # A bad POST or a GET request, so render signup.html with an empty form
@@ -49,27 +52,28 @@ def signup(request):
     # )
 
 #__________Athorized-only Views__________#
-
+@login_required
 def trip_index(request):
-    trips = Trip.objects.all()
+    trips = Trip.objects.filter(user=request.user)
     return render(request, 'trips/index.html', {'trips': trips})
 
+@login_required
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
     return render(request, 'trips/detail.html', {'trip': trip})
 
-class TripCreate(CreateView):
+class TripCreate(LoginRequiredMixin, CreateView):
     model = Trip
-    fields = '__all__'
+    fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
     success_url = '/trips/'
     def form_valid(self, form):
         form.instance.user = self.request.user 
         return super().form_valid(form)
 
-class TripUpdate(UpdateView):
+class TripUpdate(LoginRequiredMixin, UpdateView):
     model = Trip
-    fields = '__all__'
+    fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
 
-class TripDelete(DeleteView):
+class TripDelete(LoginRequiredMixin, DeleteView):
     model = Trip
     success_url = '/trips/'
