@@ -5,22 +5,28 @@
 {% endblock %} 
 {% block content %}
 <section class="cat-container">
+      <h1>Destination: {{ trip.location }}</h1>
+
   <div class="cat-img">
     <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="A skater boy cat" />
   </div>
   <div class="cat-details">
-    <h1>{{ Trip.location }}</h1>
     
-     {% comment %} <p>Your upcoming {{ trip.location }} trip</p> {% endcomment %}
-        {% comment %} <h2 class="card-title">{{ trip.location }}</h2>
         {% if trip.date > today %}
-        <p>Your upcoming {{ trip.location }} trip</p>
-        {% elif trip.date = today %}
-        <p>Your current {{ trip.location }} trip</p>
+        <h3>Your upcoming {{ trip.location }} trip</h3>
+        {% elif trip.date == today %}
+        <h3>Your current {{ trip.location }} trip</h3>
         {% else %}
-        <p>Your past {{ trip.location }} trip</p>
+        <h3>Your past {{ trip.location }} trip</h3>
         {% endif %}
-        <p><small>{{ trip.notes }}</small></p> {% endcomment %}
+
+        <h4>Depart: {{trip.start_date}}</h4>
+        <h4>Return: {{trip.end_date}} </h4>
+        <h3> Companion: {{trip.companion}}</h3>
+        <h3>Emergency Contact: {{trip.emergency_contact}}</h3>
+        <h3>Transportation: {{trip.transportation}}</h3>
+        <h3>Lodging: {{trip.lodging}}</h3>
+        <p>Notes: {{ trip.notes }}</p>
 
 
   </div>

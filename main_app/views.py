@@ -53,5 +53,5 @@ class TripUpdate(UpdateView):
     fields = '__all__'
 
 class TripDelete(DeleteView):
-    Model = Trip
+    model = Trip
     success_url = '/trips/'
