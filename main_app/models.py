@@ -1,21 +1,26 @@
 from django.db import models
+from django.urls import reverse
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 # Create your models here.
 
 
 class Trip(models.Model):
-    location = models.CharField
-    start_date = models.DateField
-    end_date = models.DateField
-    companion = models.CharField
-    emergency_contact = models.CharField
-    transportation = models.CharField
-    lodging = models.CharField
-    attractions = models.TextField
-    notes = models.TextField
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    companion = models.CharField(max_length=100)
+    emergency_contact = models.CharField(max_length=100)
+    transportation = models.CharField(max_length=100)
+    lodging = models.CharField(max_length=100)
+    attractions = models.TextField(max_length=250)
+    notes = models.TextField(max_length=250)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.location
+
+    # def get_absolute_url(self):
+    #     return reverse('trip_detail', kwargs={'trip_id': self.id})
+    

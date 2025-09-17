@@ -1,6 +1,7 @@
 from django.shortcuts import render
 # from django.http import HttpResponse
 from datetime import datetime
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Trip
 
 # from django.contrib.auth.views import LoginView
@@ -12,16 +13,16 @@ from .models import Trip
 
 
 
-class Trip:
-    def __init__(self, location, date):
-        self.location = location
-        self.date = date
+# class Trip:
+#     def __init__(self, location, date):
+#         self.location = location
+#         self.date = date
 
-trips = [
-    Trip('Paris', 9/19/2024),
-    Trip('Cairo', 5/15/2026),
-    Trip('Sydney', 12/12/2023)
-]
+# trips = [
+#     Trip('Paris', 9/19/2024),
+#     Trip('Cairo', 5/15/2026),
+#     Trip('Sydney', 12/12/2023)
+# ]
 
 
 def home(request):
@@ -41,3 +42,16 @@ def trip_index(request):
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
     return render(request, 'trips/detail.html', {'trip': trip})
+
+class TripCreate(CreateView):
+    model = Trip
+    fields = '__all__'
+    success_url = '/trips/'
+
+class TripUpdate(UpdateView):
+    model = Trip
+    fields = '__all__'
+
+class TripDelete(DeleteView):
+    Model = Trip
+    success_url = '/trips/'
