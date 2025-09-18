@@ -15,4 +15,7 @@ urlpatterns = [
     path('trips/<int:pk>/update/', views.TripUpdate.as_view(), name='trip-update'),
     path('trips/<int:pk>/delete/', views.TripDelete.as_view(), name='trip-delete'),
 
+    path('transportation/create', views.TransportationCreate.as_view(), name='transportation-create'),
+    path('transportation/<int:pk>/update', views.TransportationUpdate.as_view(), name='transportation-update'),
+    path('transportation/<int:pk>/delete', views.TransportationUpdate.as_view(), name='transportation-delete'),
     ]

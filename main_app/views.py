@@ -1,8 +1,8 @@
 from django.shortcuts import render
 # from datetime import datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Trip
-from .forms import DateForm
+from .models import Trip, Transportation_stretch
+from .forms import DateForm, TransportationForm
 from django.db import models
 
 
@@ -64,7 +64,11 @@ def trip_index(request):
 @login_required
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
-    return render(request, 'trips/detail.html', {'trip': trip})
+    Transportation_form = TransportationForm()
+    return render(request, 'trips/detail.html', {
+        'trip': trip,
+        'transportation_form':TransportationForm
+    })
 
 class TripCreate(LoginRequiredMixin, CreateView):
     #First add of widget; didn't work
@@ -75,41 +79,23 @@ class TripCreate(LoginRequiredMixin, CreateView):
         def form_valid(self, form):
             form.instance.user = self.request.user
             return super().form_valid(form)
-        # # widgets = {
-        # #     'start_date': forms.DateInput(
-        # #     format=('%Y-%m-%d'),
-        # #         attrs={
-        # #             'placeholder': 'Select a date',
-        # #             'type': 'date'
-        # #         }
-        # #     ),
-        # # }
-        # success_url = '/trips/'
-        #     def form_valid(self, form):
-        #         form.instance.user = self.request.user 
-        #         return super().form_valid(form)
-      
-     #second add of widget; didn't work 
-    # class DateInput(forms.DateInput):
-    #     # Subclass of Django’s DateInput widget to use <input type=date>.
-    #     input_type = 'start_date'
-    # def customize_fields(db_field, **kwargs):
-    #     if isinstance(db_field, models.DateField):
-    #         kwargs["widget"] = DateInput
-    #     return db_field.formfield(**kwargs)
-    # class TripForm(forms.ModelForm):
-    #     class Meta:
-    #         model = Trip
-    #         fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
-    #         formfield_callback = customize_fields
-
-
-   
+        
 
 class TripUpdate(LoginRequiredMixin, UpdateView):
     model = Trip
-    fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
-
+    form_class = DateForm
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+    
 class TripDelete(LoginRequiredMixin, DeleteView):
     model = Trip
     success_url = '/trips/'
+
+@login_required
+def add_transportation(request, trip_id):
+    form = TransportationForm(request.POST)
+    if form.is_valid():
+        new_transportation_stretch = form.save(commit=False)
+        new_transportation_stretch.trip_id = trip_id
+        new_transportation_stretch.save()

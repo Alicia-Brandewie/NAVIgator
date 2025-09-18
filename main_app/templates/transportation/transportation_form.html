@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %} 
+{% block content %}
+  <div class="page-header">
+    {% if object %}
+      <h1>Edit {{object.trip.name}}'s {{object.type}}?</h1>
+      <img
+        src="{% static 'images/hay_8849969.png' %}"
+        alt="Hay is for horses"
+      />
+      <img 
+        src="{% static 'images/carrot_1860544.png' %}" 
+        alt="Carrot" 
+      />
+    {% else %}
+      <h1>Add transportation</h1>
+    {% endif %}
+    {% comment %} <img src="{% static 'images/nerd-cat.svg' %}" alt="A cat using a computer" /> {% endcomment %}
+  </div>
+  <form action="" method="post" class="form-container" autocomplete="off">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn submit">Submit!</button>
+  </form>
+
+{% endblock %}

@@ -34,6 +34,69 @@
     <a href="{% url 'trip-update' trip.id %}" class="btn warn">Edit</a>
     <a href="{% url 'trip-delete' trip.id %}" class="btn danger">Delete</a>
   </div>
-
 </section>
+
+<div class="feedings-toy-container">
+  <section class="feedings">
+    <div class="subsection-title">
+      <h2>Transportation</h2>
+      <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
+    </div>
+    
+
+
+
+    <h3>Add Transportation</h3>
+    <form 
+      action="{% url 'add-transportation' trip.id %}"
+      method="post" class="subsection-content" 
+      autocomplete="off"
+    >
+      {% csrf_token %} 
+      {{ transportation_form }}
+      <button type="submit" class="btn submit">Add transportation</button>
+    </form>
+
+
+
+
+
+
+
+
+    <h3>Scheduled Transportation</h3>
+    {% if trip.transportation_stretch_set.all.count %}
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Company</th>
+          <th>Departure Location</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for transportation_stretch in trip.transportation_stretch_set.all %}
+          <tr>
+            <td>{{transportation_stretch.type}}</td>
+            <td>{{transportation_stretch.company}}</td>
+            <td>{{transportation_stretch.departure_location}}</td>
+            <td>
+              {% comment %} <a href='{% url '' transportation_stretch.id %}' class='btn warn'>Edit</a>
+              <a href='{% url '' transportation_stretch.id %}' class='btn danger'>Delete</a> {% endcomment %}
+            </td>      
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+        {% else %}
+          <div class="subsection-content">
+            <p>⚠️ You haven't scheduled a way to get to {{trip.location}} yet!</p>
+          </div>
+        {% endif %}
+  </section>
+</div>
+
+
+
 {% endblock %}
