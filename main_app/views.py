@@ -1,7 +1,11 @@
 from django.shortcuts import render
-from datetime import datetime
+# from datetime import datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Trip
+from .forms import DateForm
+from django.db import models
+
+
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
@@ -63,12 +67,42 @@ def trip_detail(request, trip_id):
     return render(request, 'trips/detail.html', {'trip': trip})
 
 class TripCreate(LoginRequiredMixin, CreateView):
-    model = Trip
-    fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
-    success_url = '/trips/'
-    def form_valid(self, form):
-        form.instance.user = self.request.user 
-        return super().form_valid(form)
+    #First add of widget; didn't work
+    # class Meta:
+        model = Trip
+        # fields = ['location', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
+        form_class = DateForm
+       
+        # # widgets = {
+        # #     'start_date': forms.DateInput(
+        # #     format=('%Y-%m-%d'),
+        # #         attrs={
+        # #             'placeholder': 'Select a date',
+        # #             'type': 'date'
+        # #         }
+        # #     ),
+        # # }
+        # success_url = '/trips/'
+        #     def form_valid(self, form):
+        #         form.instance.user = self.request.user 
+        #         return super().form_valid(form)
+      
+     #second add of widget; didn't work 
+    # class DateInput(forms.DateInput):
+    #     # Subclass of Django’s DateInput widget to use <input type=date>.
+    #     input_type = 'start_date'
+    # def customize_fields(db_field, **kwargs):
+    #     if isinstance(db_field, models.DateField):
+    #         kwargs["widget"] = DateInput
+    #     return db_field.formfield(**kwargs)
+    # class TripForm(forms.ModelForm):
+    #     class Meta:
+    #         model = Trip
+    #         fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
+    #         formfield_callback = customize_fields
+
+
+   
 
 class TripUpdate(LoginRequiredMixin, UpdateView):
     model = Trip
