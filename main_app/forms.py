@@ -16,8 +16,6 @@ class DateForm(forms.ModelForm):
                     'type': 'date'
                 }
             ),
-        }
-        widgets = {
             'end_date': forms.DateInput(
                 format=('%Y-%m-%d'),
                 attrs={
@@ -26,6 +24,15 @@ class DateForm(forms.ModelForm):
                 }
             ),
         }
+        # widgets = {
+        #     'end_date': forms.DateInput(
+        #         format=('%Y-%m-%d'),
+        #         attrs={
+        #             'placeholder': 'Select a date',
+        #             'type': 'date'
+        #         }
+        #     ),
+        # }
 
 
 

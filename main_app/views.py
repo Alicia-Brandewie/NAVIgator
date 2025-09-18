@@ -72,7 +72,9 @@ class TripCreate(LoginRequiredMixin, CreateView):
         model = Trip
         # fields = ['location', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
         form_class = DateForm
-       
+        def form_valid(self, form):
+            form.instance.user = self.request.user
+            return super().form_valid(form)
         # # widgets = {
         # #     'start_date': forms.DateInput(
         # #     format=('%Y-%m-%d'),
