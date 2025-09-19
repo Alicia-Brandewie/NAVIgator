@@ -53,7 +53,7 @@
       autocomplete="off"
     >
       {% csrf_token %} 
-      {{ transportation_form }}
+      {{ transportation_form.as_p }}
       <button type="submit" class="btn submit">Add transportation</button>
     </form>
 

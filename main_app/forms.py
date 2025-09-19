@@ -25,6 +25,7 @@ class DateForm(forms.ModelForm):
             ),
         }
 
-class TransportationForm:
-    model = Transportation_stretch
-    fields = all
+class TransportationForm(forms.ModelForm):
+    class Meta:
+        model = Transportation_stretch
+        fields = all
