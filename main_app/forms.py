@@ -1,6 +1,7 @@
 
 from django import forms
-from .models import Trip, Transportation_stretch
+from .models import Trip
+    # , Transportation_stretch
 
 
 #from https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-editing/#model-forms
@@ -25,7 +26,7 @@ class DateForm(forms.ModelForm):
             ),
         }
 
-class TransportationForm(forms.ModelForm):
-    class Meta:
-        model = Transportation_stretch
-        fields = all
+# class TransportationForm(forms.ModelForm):
+#     class Meta:
+#         model = Transportation_stretch
+#         fields = all

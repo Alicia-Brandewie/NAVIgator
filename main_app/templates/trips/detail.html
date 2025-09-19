@@ -5,7 +5,7 @@
 {% endblock %} 
 {% block content %}
 <section class="cat-container">
-      <h1>Destination: {{ trip.location }}</h1>
+  <h1>Destination: {{ trip.location }}</h1>
 
   <div class="cat-img">
     <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="A skater boy cat" />
@@ -36,34 +36,23 @@
   </div>
 </section>
 
-<div class="feedings-toy-container">
+{% comment %} <div class="feedings-toy-container">
   <section class="feedings">
     <div class="subsection-title">
       <h2>Transportation</h2>
       <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
     </div>
-    
-
-
-
     <h3>Add Transportation</h3>
     <form 
       action="{% url 'add-transportation' trip.id %}"
-      method="post" class="subsection-content" 
+      method="post" 
+      class="subsection-content" 
       autocomplete="off"
     >
       {% csrf_token %} 
       {{ transportation_form.as_p }}
       <button type="submit" class="btn submit">Add transportation</button>
     </form>
-
-
-
-
-
-
-
-
     <h3>Scheduled Transportation</h3>
     {% if trip.transportation_stretch_set.all.count %}
     <table>
@@ -95,7 +84,7 @@
           </div>
         {% endif %}
   </section>
-</div>
+</div> {% endcomment %}
 
 
 

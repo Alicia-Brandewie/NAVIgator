@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 # from datetime import datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Trip, Transportation_stretch
-from .forms import DateForm, TransportationForm
+from .models import Trip 
+    # , Transportation_stretch
+from .forms import DateForm
+    # , TransportationForm
 from django.db import models
 
 
@@ -67,7 +69,7 @@ def trip_detail(request, trip_id):
     # transportation_form = TransportationForm()
     return render(request, 'trips/detail.html', {
         'trip': trip,
-        'transportation_form':TransportationForm
+        # 'transportation_form':TransportationForm
     })
 
 class TripCreate(LoginRequiredMixin, CreateView):
@@ -92,28 +94,28 @@ class TripDelete(LoginRequiredMixin, DeleteView):
     model = Trip
     success_url = '/trips/'
 
-@login_required
-def add_transportation(request, trip_id):
-    form = TransportationForm(request.POST)
-    if form.is_valid():
-        new_transportation_stretch = form.save(commit=False)
-        new_transportation_stretch.trip_id = trip_id
-        new_transportation_stretch.save()
-    return redirect('trip-detail', trip_id=trip_id)
+# @login_required
+# def add_transportation(request, trip_id):
+#     form = TransportationForm(request.POST)
+#     if form.is_valid():
+#         new_transportation_stretch = form.save(commit=False)
+#         new_transportation_stretch.trip_id = trip_id
+#         new_transportation_stretch.save()
+#     return redirect('trip-detail', trip_id=trip_id)
 
-class TransportationCreate(LoginRequiredMixin, CreateView):
-    model = Transportation_stretch
-    fields = '__all__'
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+# class TransportationCreate(LoginRequiredMixin, CreateView):
+#     model = Transportation_stretch
+#     fields = '__all__'
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
 
-class TransportationUpdate(LoginRequiredMixin, UpdateView):
-    model = Transportation_stretch
-    fields = '__all__'
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+# class TransportationUpdate(LoginRequiredMixin, UpdateView):
+#     model = Transportation_stretch
+#     fields = '__all__'
+#     def form_valid(self, form):
+#         form.instance.user = self.request.user
+#         return super().form_valid(form)
 
-class TransportationDelete(LoginRequiredMixin, DeleteView):
-    model = Transportation_stretch
+# class TransportationDelete(LoginRequiredMixin, DeleteView):
+#     model = Transportation_stretch
