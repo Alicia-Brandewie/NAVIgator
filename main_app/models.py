@@ -36,4 +36,3 @@ class Trip(models.Model):
 
 #     def __str__(self):
 #         return self.type
-#         #not sure if this is enough info, but place to start
