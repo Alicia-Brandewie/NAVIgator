@@ -16,4 +16,11 @@ urlpatterns = [
     # path('transportation/create', views.TransportationCreate.as_view(), name='transportation-create'),
     # path('transportation/<int:pk>/update', views.TransportationUpdate.as_view(), name='transportation-update'),
     # path('transportation/<int:pk>/delete', views.TransportationUpdate.as_view(), name='transportation-delete'),
+    
+    path('attractions/create', views.AttractionCreate.as_view(), name='attraction-create'),
+    path('attractions/<int:pk>/', views.AttractionDetail.as_view(), name='attraction-detail'),
+    path('attractions/', views.AttractionList.as_view(), name='attraction-index'),
+    path('attractions/<int:pk>/update/', views.AttractionUpdate.as_view(), name='attraction-update'),    
+    path('attractions/<int:pk>/delete/', views.AttractionDelete.as_view(), name='attraction-delete'),
+    
     ]

@@ -36,3 +36,14 @@ class Trip(models.Model):
 
 #     def __str__(self):
 #         return self.type
+
+
+class Attraction(models.Model):
+    name = models.CharField(max_length=100)
+    notes = models.TextField(max_length=350)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('attraction-detail', kwargs={'pk': self.id})

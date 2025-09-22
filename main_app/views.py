@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 # from datetime import datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Trip 
+from .models import Trip, Attraction 
     # , Transportation_stretch
 from .forms import DateForm
     # , TransportationForm
 from django.db import models
+from django.views.generic import ListView, DetailView
 
 
 
@@ -119,3 +120,22 @@ class TripDelete(LoginRequiredMixin, DeleteView):
 
 # class TransportationDelete(LoginRequiredMixin, DeleteView):
 #     model = Transportation_stretch
+
+
+class AttractionCreate(LoginRequiredMixin, CreateView):
+    model = Attraction
+    fields = '__all__'
+
+class AttractionList(LoginRequiredMixin, ListView):
+    model = Attraction
+
+class AttractionDetail(LoginRequiredMixin, DetailView):
+    model = Attraction
+
+class AttractionUpdate(LoginRequiredMixin, UpdateView):
+    model = Attraction
+    fields = '__all__'
+
+class AttractionDelete(LoginRequiredMixin, DeleteView):
+    model = Attraction
+    success_url = '/attractions/'
