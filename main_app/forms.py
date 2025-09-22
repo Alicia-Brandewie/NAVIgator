@@ -8,7 +8,7 @@ from .models import Trip
 class DateForm(forms.ModelForm):
     class Meta:
         model = Trip
-        fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
+        fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'notes']
         widgets = {
             'start_date': forms.DateInput(
                 format=('%Y-%m-%d'),
