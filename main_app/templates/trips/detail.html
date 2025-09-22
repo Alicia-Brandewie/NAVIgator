@@ -22,10 +22,11 @@
 
         <h4>Depart: {{trip.start_date}}</h4>
         <h4>Return: {{trip.end_date}} </h4>
-        <h3> Companion: {{trip.companion}}</h3>
+        <h3>Companion: {{trip.companion}}</h3>
         <h3>Emergency Contact: {{trip.emergency_contact}}</h3>
         <h3>Transportation: {{trip.transportation}}</h3>
         <h3>Lodging: {{trip.lodging}}</h3>
+        <h3>Attractions: {{trip.old_attractions}}</h3>
         <p>Notes: {{ trip.notes }}</p>
 
 
@@ -86,6 +87,53 @@
   </section>
 </div> {% endcomment %}
 
+<section class="toys">
+  <div class="subsection-title">
+    <h2>Attractions</h2>
+    <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+    <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+    <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+  </div>
 
+  <h3>{{ trip.location }}'s attractions</h3>
+  <div class="subsection-content">
+    {% if trip.attractions.count %} 
+      {% for attraction in trip.attractions.all %}
+        <div class="toy-container">
+          <div class="color-block" style="background-color: {{ toy.color }}"></div>
+          <a href="{% url 'attraction-detail' attraction.id %}">
+            <p>{{ attraction.name }}</p>
+          </a>
+            <form action="{% url 'remove-attraction' trip.id attraction.id %}" method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Remove Attraction</button>
+</form>
+
+        </div>
+      {% endfor %} 
+    {% else %}
+      <p class="no-toys">{{trip.location}} doesn't have anything scheduled!</p>
+    {% endif %}
+  </div>
+
+
+  <h3>Things you can do on your trip:</h3>
+  <div class="subsection-content">
+    {% if attractions.count %}
+        {% for attraction in attractions %}
+          <div class="toy-container">
+            <div class="color-block" style="background-color: {{ toy.color }}"></div>
+            <p>{{ attraction.name }}</p>
+            <form action="{% url 'associate-attraction' trip.id attraction.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Add Attraction</button>
+            </form>
+          </div>
+        {% endfor %}
+    {% else %}
+        <p class="all-toys">{{trip.location}} already has all the available attractions🥳</p>
+    {% endif %}
+  </div>
+</section>
 
 {% endblock %}

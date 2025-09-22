@@ -68,9 +68,11 @@ def trip_index(request):
 def trip_detail(request, trip_id):
     trip = Trip.objects.get(id=trip_id)
     # transportation_form = TransportationForm()
+    attractions_trip_doesnt_have = Attraction.objects.exclude(id__in = trip.attractions.all().values_list('id'))
     return render(request, 'trips/detail.html', {
         'trip': trip,
         # 'transportation_form':TransportationForm
+        'attractions': attractions_trip_doesnt_have
     })
 
 class TripCreate(LoginRequiredMixin, CreateView):
@@ -139,3 +141,15 @@ class AttractionUpdate(LoginRequiredMixin, UpdateView):
 class AttractionDelete(LoginRequiredMixin, DeleteView):
     model = Attraction
     success_url = '/attractions/'
+
+@login_required
+def associate_attraction(request, trip_id, attraction_id):
+    Trip.objects.get(id=trip_id).attractions.add(attraction_id)
+    return redirect('trip-detail', trip_id=trip_id)
+
+@login_required
+def remove_attraction(request, trip_id, attraction_id):
+    trip = Trip.objects.get(id=trip_id)
+    attraction = Attraction.objects.get(id=attraction_id)
+    trip.attractions.remove(attraction)
+    return redirect('trip-detail', trip_id=trip.id)

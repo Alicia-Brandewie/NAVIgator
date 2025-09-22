@@ -5,6 +5,17 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+class Attraction(models.Model):
+    name = models.CharField(max_length=100)
+    notes = models.TextField(max_length=350)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('attraction-detail', kwargs={'pk': self.id})
+
+
 class Trip(models.Model):
     location = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -13,9 +24,10 @@ class Trip(models.Model):
     emergency_contact = models.CharField(max_length=100)
     transportation = models.CharField(max_length=100)
     lodging = models.CharField(max_length=100)
-    attractions = models.TextField(max_length=250)
+    old_attractions = models.TextField(max_length=250)
     notes = models.TextField(max_length=250)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    attractions = models.ManyToManyField(Attraction)
     
     def __str__(self):
         return self.location
@@ -37,13 +49,3 @@ class Trip(models.Model):
 #     def __str__(self):
 #         return self.type
 
-
-class Attraction(models.Model):
-    name = models.CharField(max_length=100)
-    notes = models.TextField(max_length=350)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return reverse('attraction-detail', kwargs={'pk': self.id})
