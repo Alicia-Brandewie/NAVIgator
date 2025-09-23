@@ -9,16 +9,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" type="image/png" href="" />
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-
     <title>NAVIgator</title>
-    {% block head %} 
+      {% block head %} 
     {% endblock %}
   </head>
   <body>
     <header>
       <div class="header-logo-container">
         <a href="/">
-          <img src="images/gps_11315343" alt="The Logo" />
+          <img src="{% static 'images/Navi.png' %}" alt="The Logo" />
         </a>
       </div>
       <nav>
@@ -43,8 +42,11 @@
       </nav>
     </header>
     <main>
-     {% block content %} 
-     {% endblock %}
+  
+    {% block content %} 
+    {% endblock %}
+
+    
      </main>
   </body>
 </html>

@@ -1,8 +1,17 @@
 {% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %} 
 {% block content %}
-<h1>About NAVIgator</h1>
-<hr />
-<p class="page-content">
+<div class="page-header">
+    <h1>About NAVIgator</h1>
+    <img src="{% static 'images/crab.png' %}" alt="A whimsical origami crab" />
+    <img src="{% static 'images/crab.png' %}" alt="A whimsical origami crab" />
+    <img src="{% static 'images/crab.png' %}" alt="A whimsical origami crab" />
+</div>
+<hr/>
+<h2 class="page-content">
 The travel companion app
-</p>
+</h2>
 {% endblock %}

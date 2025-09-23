@@ -6,17 +6,22 @@
 {% block content %}
 <div class="page-header">
   <h1>Sign Up</h1>
-  <img src="{% static 'images/nerd-cat.svg' %}" alt="A cat using a computer" />
+  <img src="{% static 'images/person.png' %}" alt="A whimsical origami person" />
+  <img src="{% static 'images/person.png' %}" alt="A whimsical origami person" />
+  <img src="{% static 'images/person.png' %}" alt="A whimsical origami person" />
 </div>
 {% if error_message %}
   <p class="red-text">{{ error_message }}</p>
 {% endif %}
-<form action="" method="post" class="form-container" autocomplete="off">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-  </table>
-  <button type="submit" class="btn submit">Submit!</button>
-</form>
+<section class=".login">
+  <form action="" method="post" class="form-container" autocomplete="off">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn submit">Submit!</button>
+  </form>
+</section>
+
 
 {% endblock %}

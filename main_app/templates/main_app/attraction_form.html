@@ -2,6 +2,9 @@
 {% load static %} 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/form.css' %}" />
+  <script type="module" src="./index.js"></script>
+   <!--script line from GOOGle MAPS PLATFORM -->
+
 {% endblock %} 
 {% block content %}
   <div class="page-header">
@@ -10,7 +13,9 @@
     {% else %}
       <h1>Add an Attraction</h1>
     {% endif %}
-    <img src="{% static 'images/nerd-cat.svg' %}" alt="A cat using a computer" />
+    <img src="{% static 'images/swan.png' %}" alt="A whimsical origami swan" />
+    <img src="{% static 'images/swan.png' %}" alt="A whimsical origami swan" />
+    <img src="{% static 'images/swan.png' %}" alt="A whimsical origami swan" />
   </div>
   <form action="" method="post" class="form-container" autocomplete="off">
     {% csrf_token %}
@@ -19,5 +24,26 @@
     </table>
     <button type="submit" class="btn submit">Submit!</button>
   </form>
+
+   
+<section>
+     <!--this section from GOOGle MAPS PLATFORM -->
+
+ <gmp-map
+      center="38.7946,-106.5348"
+      zoom="4"
+      map-id="DEMO_MAP_ID"
+      style="height: 400px"
+    >
+    </gmp-map>
+
+    <!--
+      The `defer` attribute causes the script to execute after the full HTML
+      document has been parsed. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key='GOOGLE_MAPS_API_KEY'&libraries=maps"
+      defer
+    ></script>
+  </section>
 
 {% endblock %}

@@ -198,7 +198,8 @@ nav li {
   }
 
   .header-logo-container {
-    width: 213px;
+    width: 100px;
+    height: 100px;
   }
 
   .page-header h1 {
@@ -269,7 +270,15 @@ nav li {
       backdrop-filter: blur(3px);
     }
   }
+
+img {
+    max-width: 100%;
+    max-height:100%;
+    display: block;
+  }
 }
+
+
 
 #logout-form button {
   text-decoration: none;

@@ -13,8 +13,23 @@ https://docs.djangoproject.com/en/5.1/topics/forms/modelforms/#modelform
 
 
 
+
+# Google Maps: Places Library Maps JavaScript API
+
+https://developers.google.com/maps/documentation/javascript 
+
+& 
+
+https://www.freecodecamp.org/news/how-to-integrate-google-apis-with-python-django/
+
+
+
 # Technologoies uses
 
     DB = postgresql
     Python
     Django
+
+
+# Images
+https://www.freepik.com/

@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% load static %} 
-
 {% block head %}
-<section>
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+<section class="logo-container">
     <h1>NAVIgator</h1>
-    <h3>Welcome!</h3>
+    <h2>Welcome!</h2>
+    <img src="{% static 'images/Navi.png' %}" alt="NAVIgator Logo"/>
+
 </section>
 
 {% if not user.is_authenticated %}
-    <section>
+<section class=".login">
     <form action="{% url 'home' %}" method="post" class="login">
         <h1>Login</h1>
         {% csrf_token %} {{ form.as_p }}

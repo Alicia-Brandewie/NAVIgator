@@ -4,10 +4,12 @@
 
 <div class="page-header">
   <h1>Delete Trip?</h1>
-  <img src="{% static 'images/nerd-cat.svg' %}" alt="A cat using a computer" />
+  <img src="{% static 'images/fish.png' %}" alt="A whimsical origami fish" />
+  <img src="{% static 'images/fish.png' %}" alt="A whimsical origami fish" />
+  <img src="{% static 'images/fish.png' %}" alt="A whimsical origami fish" />
 </div>
 
-<h2>Are you sure you want to delete {{ trip.location }}?</h2>
+<h2>Are you sure you want to delete {{ trip.location }} trip?</h2>
 
 <form action="" method="post" class="form">
   {% csrf_token %}
