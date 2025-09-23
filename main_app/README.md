@@ -1,4 +1,4 @@
-!["NAVIgator" in black letters above "Welcome!" in black letters, above the NAVIgator logo, a whimsical blue origami 4-winged fairy]: 
+!["NAVIgator" in black letters above "Welcome!" in black letters, above the NAVIgator logo, a whimsical blue origami 4-winged fairy](https://raw.githubusercontent.com/Alicia-Brandewie/NAVIgator/refs/heads/main/main_app/static/images/NAVIgator%20logo.jpg)
 
 # NAVIgator
 
