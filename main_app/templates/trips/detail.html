@@ -6,121 +6,132 @@
 {% endblock %} 
 {% block content %}
 <section class="cat-container">
+  <div class="cat-details">
   <h1>Destination: {{ trip.location }}</h1>
-
-  <div class="cat-img">
-    <img src="{% static 'images/cactus.png' %}" alt="A whimsical origami cactus" />
+    <div class="cat-actions">
+      <a href="{% url 'trip-update' trip.id %}" class="btn warn">Edit</a>
+      <a href="{% url 'trip-delete' trip.id %}" class="btn danger">Delete</a>
+    </div>
+    <div class="cat-img">
+      <img src="{% static 'images/cactus.png' %}" alt="A whimsical origami cactus" />
+    </div>
   </div>
   <div class="cat-details">
-    
         {% if trip.date > today %}
-        <h3>Your upcoming {{ trip.location }} trip</h3>
+        <h2>Your upcoming {{ trip.location }} trip</h2>
         {% elif trip.date == today %}
-        <h3>Your current {{ trip.location }} trip</h3>
+        <h2>Your current {{ trip.location }} trip</h2>
         {% else %}
-        <h3>Your past {{ trip.location }} trip</h3>
+        <h2>Your past {{ trip.location }} trip</h2>
         {% endif %}
-
-        <h4>Depart: {{trip.start_date}}</h4>
-        <h4>Return: {{trip.end_date}} </h4>
-        <h3>Companion: {{trip.companion}}</h3>
-        <h3>Emergency Contact: {{trip.emergency_contact}}</h3>
-        <h3>Transportation: {{trip.old_transportation}}</h3>
-        <h3>Lodging: {{trip.lodging}}</h3>
-        <h3>Attractions: {{trip.old_attractions}}</h3>
-        <p>Notes: {{ trip.notes }}</p>
+        <h3>Depart: </h3>
+          <p>{{trip.start_date}}</p>
+        <h3>Return:  </h3>
+          <p>{{trip.end_date}}</p>
+        <h3>Companion: </h3>
+          <p>{{trip.companion}}</p>
+        <h3>Emergency Contact: </h3>
+          <p>{{trip.emergency_contact}}</p>
+        <h3>Transportation: </h3>
+          <p>{{trip.old_transportation}}</p>
+        <h3>Lodging: </h3>
+          <p>{{trip.lodging}}</p>
+        <h3>Attractions: </h3>
+          <p>{{trip.old_attractions}}</p>
+        <h3>Notes: </h3>
+          <p>{{ trip.notes }}</p>
   </div>
 
-  <div class="cat-actions">
-    <a href="{% url 'trip-update' trip.id %}" class="btn warn">Edit</a>
-    <a href="{% url 'trip-delete' trip.id %}" class="btn danger">Delete</a>
-  </div>
+
 </section>
 
+<section class="cat-container">
 
-<div class="feedings-toy-container">
-  <section class="feedings">
-    <div class="subsection-title">
-    <h3>Scheduled Transportation</h3>
-    {% if trip.transportation_set.all.count %}
-    <table>
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Company</th>
-          <th>Departure Location</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for transportation in trip.transportation_set.all %}
+
+  <div class="feedings-toy-container">
+    <section class="feedings">
+      <div class="subsection-title">
+      <h2>Scheduled Transportation</h2>
+      <img src="{% static 'images/fox.png' %}" alt="A whimsical origami fox" />
+      </div>
+      {% if trip.transportation_set.all.count %}
+      <table>
+        <thead>
           <tr>
-            <td>{{transportation.type}}</td>
-            <td>{{transportation.company}}</td>
-            <td>{{transportation.departure_location}}</td>
-            <td>
-              <a href="{% url 'transportation-update' transportation.id %}" class='btn warn'>Edit</a>
-              <a href="{% url 'transportation-delete' transportation.id %}" class='btn danger'>Delete</a> 
-            </td>      
+            <th>Type</th>
+            <th>Company</th>
+            <th>Departure Location</th>
+            <th>Actions</th>
           </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-        {% else %}
-          <div class="subsection-content">
-            <p>⚠️ You haven't scheduled a way to get to {{trip.location}} yet!</p>
-          </div>
-        {% endif %}
-  </section>
-</div> 
+        </thead>
+        <tbody>
+          {% for transportation in trip.transportation_set.all %}
+            <tr>
+              <td>{{transportation.type}}</td>
+              <td>{{transportation.company}}</td>
+              <td>{{transportation.departure_location}}</td>
+              <td>
+                <a href="{% url 'transportation-update' transportation.id %}" class='btn warn'>Edit</a>
+                <a href="{% url 'transportation-delete' transportation.id %}" class='btn danger'>Delete</a> 
+              </td>      
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+          {% else %}
+            <div class="subsection-content">
+              <p>⚠️ You haven't scheduled a way to get to {{trip.location}} yet!</p>
+            </div>
+          {% endif %}
+    </section>
+  </div> 
 
+  <div class="feedings-toy-container">
+  <section class="toys">
+    <div class="subsection-title">
+      <h2>Attractions</h2>
+      <img src="{% static 'images/dragon.png' %}" alt="A whimsical origami dragon" />
+    </div>
 
-<section class="toys">
-  <div class="subsection-title">
-    <h2>Attractions</h2>
-    <img src="{% static 'images/flower.png' %}" alt="A whimsical origami flower" />
-    <img src="{% static 'images/flower.png' %}" alt="A whimsical origami flower" />
-    <img src="{% static 'images/flower.png' %}" alt="A whimsical origami flower" />
-  </div>
-
-  <h3>{{ trip.location }}'s attractions</h3>
-  <div class="subsection-content">
-    {% if trip.attractions.count %} 
-      {% for attraction in trip.attractions.all %}
-        <div class="toy-container">
-          <div class="color-block" style="background-color: {{ toy.color }}"></div>
-          <a href="{% url 'attraction-detail' attraction.id %}">
-            <p>{{ attraction.name }}</p>
-          </a>
-            <form action="{% url 'remove-attraction' trip.id attraction.id %}" method="post">
-  {% csrf_token %}
-  <button type="submit" class="btn btn-danger">Remove Attraction</button>
-</form>
-
-        </div>
-      {% endfor %} 
-    {% else %}
-      <p class="no-toys">{{trip.location}} doesn't have anything scheduled!</p>
-    {% endif %}
-  </div>
-
-  <h3>Things you can do on your trip:</h3>
-  <div class="subsection-content">
-    {% if attractions.count %}
-        {% for attraction in attractions %}
+    <h3>{{ trip.location }}'s attractions</h3>
+    <div class="subsection-content">
+      {% if trip.attractions.count %} 
+        {% for attraction in trip.attractions.all %}
           <div class="toy-container">
             <div class="color-block" style="background-color: {{ toy.color }}"></div>
-            <p>{{ attraction.name }}</p>
-            <form action="{% url 'associate-attraction' trip.id attraction.id %}" method="post">
-              {% csrf_token %}
-              <button type="submit" class="btn submit">Add Attraction</button>
-            </form>
-          </div>
-        {% endfor %}
-    {% else %}
-        <p class="all-toys">{{trip.location}} already has all the available attractions🥳</p>
-    {% endif %}
-  </div>
-</section>
+            <a href="{% url 'attraction-detail' attraction.id %}">
+              <p>{{ attraction.name }}</p>
+            </a>
+              <form action="{% url 'remove-attraction' trip.id attraction.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Remove Attraction</button>
+  </form>
 
+          </div>
+        {% endfor %} 
+      {% else %}
+        <p class="no-toys">{{trip.location}} doesn't have anything scheduled!</p>
+      {% endif %}
+    </div>
+
+    <h3>Things you can do on your trip:</h3>
+    <div class="subsection-content">
+      {% if attractions.count %}
+          {% for attraction in attractions %}
+            <div class="toy-container">
+              <div class="color-block" style="background-color: {{ toy.color }}"></div>
+              <p>{{ attraction.name }}</p>
+              <form action="{% url 'associate-attraction' trip.id attraction.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn submit">Add Attraction</button>
+              </form>
+            </div>
+          {% endfor %}
+      {% else %}
+          <p class="all-toys">{{trip.location}} already has all the available attractions🥳</p>
+      {% endif %}
+    </div>
+  </section>
+  </div> 
+</section>
 {% endblock %}
