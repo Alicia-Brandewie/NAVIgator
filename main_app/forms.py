@@ -1,7 +1,5 @@
-
 from django import forms
 from .models import Trip, Transportation
-
 
 #from https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-editing/#model-forms
 class DateForm(forms.ModelForm):

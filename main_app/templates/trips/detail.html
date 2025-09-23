@@ -29,9 +29,8 @@
         <h3>Lodging: {{trip.lodging}}</h3>
         <h3>Attractions: {{trip.old_attractions}}</h3>
         <p>Notes: {{ trip.notes }}</p>
-
-
   </div>
+
   <div class="cat-actions">
     <a href="{% url 'trip-update' trip.id %}" class="btn warn">Edit</a>
     <a href="{% url 'trip-delete' trip.id %}" class="btn danger">Delete</a>
@@ -39,25 +38,9 @@
 </section>
 
 
-
-
 <div class="feedings-toy-container">
   <section class="feedings">
     <div class="subsection-title">
-      {% comment %} <h2>Transportation</h2>
-      <img src="{% static 'images/fox.png' %}" alt="A whimsical origami fox" />
-    </div>
-    <h3>Add Transportation</h3>
-    <form 
-      action="{% url 'add-transportation' trip.id %}"
-      method="post" 
-      class="subsection-content" 
-      autocomplete="off"
-    >
-      {% csrf_token %} 
-      {{ transportation_form.as_p }}
-      <button type="submit" class="btn submit">Add transportation</button>
-    </form> {% endcomment %}
     <h3>Scheduled Transportation</h3>
     {% if trip.transportation_set.all.count %}
     <table>
@@ -92,9 +75,6 @@
 </div> 
 
 
-
-
-
 <section class="toys">
   <div class="subsection-title">
     <h2>Attractions</h2>
@@ -123,7 +103,6 @@
       <p class="no-toys">{{trip.location}} doesn't have anything scheduled!</p>
     {% endif %}
   </div>
-
 
   <h3>Things you can do on your trip:</h3>
   <div class="subsection-content">

@@ -19,16 +19,7 @@
             alt="A whimsical origami cactus" />
         </div>
         <h2 class="card-title">{{ trip.location }}</h2>
-        <p>Your upcoming {{ trip.location }} trip</p>
-        {% comment %} <h2 class="card-title">{{ trip.location }}</h2>
-        {% if trip.date > today %}
-        <p>Your upcoming {{ trip.location }} trip</p>
-        {% elif trip.date = today %}
-        <p>Your current {{ trip.location }} trip</p>
-        {% else %}
-        <p>Your past {{ trip.location }} trip</p>
-        {% endif %}
-        <p><small>{{ trip.notes }}</small></p> {% endcomment %}
+        <p>Your {{ trip.location }} trip</p>
         </div>
     </a>
   </div>

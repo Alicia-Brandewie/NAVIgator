@@ -24,5 +24,5 @@ urlpatterns = [
     path('attractions/', views.AttractionList.as_view(), name='attraction-index'),
     path('attractions/<int:pk>/update/', views.AttractionUpdate.as_view(), name='attraction-update'),    
     path('attractions/<int:pk>/delete/', views.AttractionDelete.as_view(), name='attraction-delete'),
-    
+
     ]

@@ -1,14 +1,10 @@
 from django.shortcuts import render, redirect
-# from datetime import datetime
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Trip, Attraction, Transportation
 from .forms import DateForm, TransportationForm
 from django.db import models
 from django.views.generic import ListView, DetailView
 from django.urls import reverse
-
-
-
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -17,18 +13,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 #__________Public Views__________#
-
 class Home(LoginView):
     template_name = 'home.html'
 
-# def home(request):
-#     return render(request, 'home.html')
-#     # return HttpResponse('<h1>NAVIgator</h1>')
-#     # template_name = 'home.html'
-
 def about(request):
     return render(request, 'about.html')
-    # return HttpResponse('<h1>ABOUT NAVIgator</h1>')
 
 #__________Authorization__________#
 
@@ -50,12 +39,6 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'signup.html', context)
-    # Same as: 
-    # return render(
-    #     request, 
-    #     'signup.html',
-    #     {'form': form, 'error_message': error_message}
-    # )
 
 #__________Athorized-only Views__________#
 @login_required
@@ -75,16 +58,13 @@ def trip_detail(request, trip_id):
     })
 
 class TripCreate(LoginRequiredMixin, CreateView):
-    #First add of widget; didn't work
-    # class Meta:
         model = Trip
-        # fields = ['location', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
+        fields = ['location', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
         form_class = DateForm
         def form_valid(self, form):
             form.instance.user = self.request.user
             return super().form_valid(form)
         
-
 class TripUpdate(LoginRequiredMixin, UpdateView):
     model = Trip
     form_class = DateForm
@@ -107,7 +87,7 @@ def add_transportation(request, trip_id):
 
 class TransportationCreate(LoginRequiredMixin, CreateView):
     model = Transportation
-    fields = ['type', 'company', 'departure_location', 'destination_location','ticket_number','notes']
+    fields = "__all__"
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)

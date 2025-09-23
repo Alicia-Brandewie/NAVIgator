@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 class Attraction(models.Model):
     name = models.CharField(max_length=100)
     notes = models.TextField(max_length=350)
@@ -14,7 +13,6 @@ class Attraction(models.Model):
 
     def get_absolute_url(self):
         return reverse('attraction-detail', kwargs={'pk': self.id})
-
 
 class Trip(models.Model):
     location = models.CharField(max_length=100)
@@ -35,8 +33,6 @@ class Trip(models.Model):
     def get_absolute_url(self):
         return reverse('trip-detail', kwargs={'trip_id': self.id})
     
-
-
 class Transportation(models.Model):
     type = models.CharField(max_length=100)
     company = models.CharField(max_length=100)

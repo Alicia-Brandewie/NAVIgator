@@ -3,18 +3,17 @@
 {% block content %}
 
 <div class="page-header">
-  <h1>Delete transportation?</h1>
+    <h1>Delete transportation?</h1>
     <img src="{% static 'images/fox.png' %}" alt="A whimsical origami fox" />
     <img src="{% static 'images/fox.png' %}" alt="A whimsical origami fox" />
     <img src="{% static 'images/fox.png' %}" alt="A whimsical origami fox" />
-
 </div>
 <h2>Are you sure you want to delete {{ transportation.type }}?</h2>
 
 <form action="" method="post" class="form">
-  {% csrf_token %}
-  <a href="{% url 'transportation-update' transportation.id %}" class="btn secondary">Cancel</a>
-  <button type="submit" class="btn danger">Yes - Delete!</button>
+    {% csrf_token %}
+    <a href="{% url 'transportation-update' transportation.id %}" class="btn secondary">Cancel</a>
+    <button type="submit" class="btn danger">Yes - Delete!</button>
 </form>
 
 {% endblock %}
