@@ -59,7 +59,6 @@ def trip_detail(request, trip_id):
 
 class TripCreate(LoginRequiredMixin, CreateView):
         model = Trip
-        fields = ['location', 'companion', 'emergency_contact', 'transportation', 'lodging', 'attractions', 'notes']
         form_class = DateForm
         def form_valid(self, form):
             form.instance.user = self.request.user
