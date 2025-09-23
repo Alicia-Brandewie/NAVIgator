@@ -22,7 +22,7 @@ class Trip(models.Model):
     end_date = models.DateField()
     companion = models.CharField(max_length=100)
     emergency_contact = models.CharField(max_length=100)
-    transportation = models.CharField(max_length=100)
+    old_transportation = models.CharField(max_length=100)
     lodging = models.CharField(max_length=100)
     old_attractions = models.TextField(max_length=250)
     notes = models.TextField(max_length=250)
@@ -37,15 +37,15 @@ class Trip(models.Model):
     
 
 
-# class Transportation_stretch(models.Model):
-#     type = models.CharField(max_length=100)
-#     company = models.CharField(max_length=100)
-#     departure_location = models.CharField(max_length=100)
-#     destination_location = models.CharField(max_length=100)
-#     ticket_number = models.CharField(max_length=100)
-#     notes = models.TextField(max_length=250)
-#     trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
+class Transportation(models.Model):
+    type = models.CharField(max_length=100)
+    company = models.CharField(max_length=100)
+    departure_location = models.CharField(max_length=100)
+    destination_location = models.CharField(max_length=100)
+    ticket_number = models.CharField(max_length=100)
+    notes = models.TextField(max_length=250)
+    trip = models.ForeignKey(Trip, on_delete=models.CASCADE)
 
-#     def __str__(self):
-#         return self.type
+    def __str__(self):
+        return self.type
 

@@ -1,14 +1,13 @@
 
 from django import forms
-from .models import Trip
-    # , Transportation_stretch
+from .models import Trip, Transportation
 
 
 #from https://docs.djangoproject.com/en/3.0/topics/class-based-views/generic-editing/#model-forms
 class DateForm(forms.ModelForm):
     class Meta:
         model = Trip
-        fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'transportation', 'lodging', 'notes']
+        fields = ['location', 'start_date', 'end_date', 'companion', 'emergency_contact', 'old_transportation', 'lodging', 'notes']
         widgets = {
             'start_date': forms.DateInput(
                 format=('%Y-%m-%d'),
@@ -26,7 +25,7 @@ class DateForm(forms.ModelForm):
             ),
         }
 
-# class TransportationForm(forms.ModelForm):
-#     class Meta:
-#         model = Transportation_stretch
-#         fields = all
+class TransportationForm(forms.ModelForm):
+    class Meta:
+        model = Transportation
+        fields = ['type', 'company', 'departure_location', 'destination_location', 'ticket_number', 'notes']

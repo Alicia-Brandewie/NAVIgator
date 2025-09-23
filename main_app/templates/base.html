@@ -25,6 +25,7 @@
         {% if user.is_authenticated %}
           <li><a href="{% url 'trip-index' %}">Trips</a></li>
           <li><a href="{% url 'trip-create' %}">Add a trip</a></li>
+          <li><a href="{% url 'transportation-create' %}">Add transportation</a></li>
           <li><a href="{% url 'attraction-create' %}">Add an attraction</a></li>          
           <li><a href="{% url 'attraction-index' %}">All attractions</a></li>
           <li><a href="{% url 'about' %}">About</a></li>

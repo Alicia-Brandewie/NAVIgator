@@ -25,7 +25,7 @@
         <h4>Return: {{trip.end_date}} </h4>
         <h3>Companion: {{trip.companion}}</h3>
         <h3>Emergency Contact: {{trip.emergency_contact}}</h3>
-        <h3>Transportation: {{trip.transportation}}</h3>
+        <h3>Transportation: {{trip.old_transportation}}</h3>
         <h3>Lodging: {{trip.lodging}}</h3>
         <h3>Attractions: {{trip.old_attractions}}</h3>
         <p>Notes: {{ trip.notes }}</p>
@@ -38,11 +38,14 @@
   </div>
 </section>
 
-{% comment %} <div class="feedings-toy-container">
+
+
+
+<div class="feedings-toy-container">
   <section class="feedings">
     <div class="subsection-title">
-      <h2>Transportation</h2>
-      <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
+      {% comment %} <h2>Transportation</h2>
+      <img src="{% static 'images/fox.png' %}" alt="A whimsical origami fox" />
     </div>
     <h3>Add Transportation</h3>
     <form 
@@ -54,9 +57,9 @@
       {% csrf_token %} 
       {{ transportation_form.as_p }}
       <button type="submit" class="btn submit">Add transportation</button>
-    </form>
+    </form> {% endcomment %}
     <h3>Scheduled Transportation</h3>
-    {% if trip.transportation_stretch_set.all.count %}
+    {% if trip.transportation_set.all.count %}
     <table>
       <thead>
         <tr>
@@ -67,14 +70,14 @@
         </tr>
       </thead>
       <tbody>
-        {% for transportation_stretch in trip.transportation_stretch_set.all %}
+        {% for transportation in trip.transportation_set.all %}
           <tr>
-            <td>{{transportation_stretch.type}}</td>
-            <td>{{transportation_stretch.company}}</td>
-            <td>{{transportation_stretch.departure_location}}</td>
+            <td>{{transportation.type}}</td>
+            <td>{{transportation.company}}</td>
+            <td>{{transportation.departure_location}}</td>
             <td>
-              {% comment %} <a href='{% url '' transportation_stretch.id %}' class='btn warn'>Edit</a>
-              <a href='{% url '' transportation_stretch.id %}' class='btn danger'>Delete</a> 
+              <a href="{% url 'transportation-update' transportation.id %}" class='btn warn'>Edit</a>
+              <a href="{% url 'transportation-delete' transportation.id %}" class='btn danger'>Delete</a> 
             </td>      
           </tr>
         {% endfor %}
@@ -86,7 +89,11 @@
           </div>
         {% endif %}
   </section>
-</div> {% endcomment %}
+</div> 
+
+
+
+
 
 <section class="toys">
   <div class="subsection-title">

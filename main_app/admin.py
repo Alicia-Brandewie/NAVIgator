@@ -1,8 +1,7 @@
 from django.contrib import admin
-from .models import Trip, Attraction
-# , Transportation_stretch
+from .models import Trip, Attraction, Transportation
 
 # Register your models here.
 admin.site.register(Trip)
 admin.site.register(Attraction)
-# admin.site.register(Transportation_stretch)
+admin.site.register(Transportation)

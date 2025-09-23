@@ -1,6 +1,6 @@
-{% comment %} {% extends 'base.html' %} 
+{% extends 'base.html' %} 
 {% load static %} 
-<link rel="stylesheet" href="{% static 'css/horses/horse-detail.css' %}" />
+{% comment %} <link rel="stylesheet" href="{% static 'css/horses/horse-detail.css' %}" /> {% endcomment %}
 
 {% block content %}
 
@@ -22,4 +22,4 @@
   <button type="submit" class="btn danger">Yes - Delete!</button>
 </form>
 
-{% endblock %} {% endcomment %}
+{% endblock %} 
