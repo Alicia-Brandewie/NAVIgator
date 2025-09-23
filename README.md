@@ -1,7 +1,4 @@
-!["NAVIgator" in black letters above "Welcome!" in black letters, above the NAVIgator logo, a whimsical blue origami 4-winged fairy]: 
-
 # NAVIgator
-
 
 [Begin here].
 
